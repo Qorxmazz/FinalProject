@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 public class BotSchedule {
 
@@ -13,7 +15,7 @@ public class BotSchedule {
     RestService restService;
 
     @Scheduled(fixedRate = 500)
-    public void hello() {
+    public void hello() throws IOException {
 
         restService.getUpdates();
 

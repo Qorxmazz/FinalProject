@@ -1,7 +1,10 @@
 package com.example.finalproject.dto;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 
+@Data
 public class Translations {
 
         public int id;

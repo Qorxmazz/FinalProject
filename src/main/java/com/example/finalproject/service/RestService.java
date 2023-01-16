@@ -2,9 +2,13 @@ package com.example.finalproject.service;
 
 import com.example.finalproject.dto.telegram.update.TelegramResponseDTO;
 import com.example.finalproject.dto.telegram.update.TelegramUpdateDTO;
+import com.example.finalproject.jsoup.JsoupService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.IOException;
 
 @Service
 public class RestService {
@@ -14,9 +18,11 @@ public class RestService {
     String baseUrl;
     @Value("${api-token}")
     String token;
+    @Autowired
+    JsoupService jsoupService;
     private Long offset = null;
 
-    public void getUpdates() {
+    public void getUpdates() throws IOException {
 
         String url = baseUrl + "/bot" + token + "/getUpdates";
 
@@ -31,6 +37,7 @@ public class RestService {
             if (telegramUpdateDTO.getMessageDTO() != null) {
                 String text = telegramUpdateDTO.getMessageDTO().getText();
                 offset = telegramUpdateDTO.getUpdateId() + 1;
+                jsoupService.jsoupService(text);
                 System.out.println(text);
             }
         }
