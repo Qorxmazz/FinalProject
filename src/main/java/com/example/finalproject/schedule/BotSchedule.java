@@ -19,5 +19,10 @@ public class BotSchedule {
 
         restService.getUpdates();
 
+
+//                TelegramResponseType = jsoupService.jsoupService(text);
+//                Long id = telegramUpdateDTO.getMessageDTO().getChat().getId();
+//                sendMessage(telegramResponseType, id);
+//                System.out.println(text);
     }
 }
