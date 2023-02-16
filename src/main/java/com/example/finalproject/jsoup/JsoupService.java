@@ -22,10 +22,10 @@ public class JsoupService {
             Elements elements = doc.select("div");
             String attr = elements.attr("ng-init");
 
-
-
-
-
+//            List<String> strings = elements.eachattr("ng-init");
+//            int limit = strings.size();
+//            int random = (int)(Math.random() * limit);
+//            String attr = strings.get(random);
             String s = attr.split("vm.init\\(\\[], ")[1];
             String s1 = s.split("\t")[0];
             s1 = s1.split(", \\[], \\[\\{")[0];
