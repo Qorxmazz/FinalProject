@@ -4,6 +4,9 @@ package com.example.finalproject.controller;
 import com.example.finalproject.config.JwtUtils;
 import com.example.finalproject.dao.UserDao;
 import com.example.finalproject.dto.AuthenticationRequest;
+import com.example.finalproject.dto.UserDTO;
+import com.example.finalproject.entity.UserEntity;
+import com.example.finalproject.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,10 +24,11 @@ public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
     private final UserDao userDao;
-//    private final UserDetailsService userDetailsService;
 
 
     private final JwtUtils jwtUtils;
+
+    private final TestRepository repository;
 
     @PostMapping("signin")
     public ResponseEntity<String> signIn(@RequestBody AuthenticationRequest request) {
@@ -37,13 +41,16 @@ public class AuthenticationController {
         return ResponseEntity.status(400).body("Something wrong with token");
     }
     @PostMapping("signup")
-    public ResponseEntity<String> signUp(@RequestBody AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        final UserDetails userDetails = userDao.findUserByEmail(request.getUsername());
-        if (userDetails != null) {
-            return ResponseEntity.ok(jwtUtils.generateToken(userDetails));
-        }
-        return ResponseEntity.status(400).body("Something wrong with token");
+    public ResponseEntity<String> signUp(@RequestBody UserDTO dto) {
+        UserEntity userEntity  = new UserEntity().builder()
+                .email(dto.getEmail())
+                .password(dto.getPassword())
+                .role(dto.getRole())
+                .build();
+        repository.save(userEntity);
+
+        return ResponseEntity.status(200).body("signed");
+
     }
+
 }
