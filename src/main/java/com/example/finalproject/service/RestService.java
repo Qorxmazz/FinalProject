@@ -7,7 +7,6 @@ import com.example.finalproject.dto.telegram.update.TelegramResponseDTO;
 import com.example.finalproject.dto.telegram.update.TelegramUpdateDTO;
 import com.example.finalproject.entity.ChatStage;
 import com.example.finalproject.entity.TelegramEntity;
-import com.example.finalproject.jsoup.JsoupService;
 import com.example.finalproject.repository.TelegramRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

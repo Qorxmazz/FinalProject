@@ -1,4 +1,4 @@
-package com.example.finalproject.jsoup;
+package com.example.finalproject.service;
 
 import com.example.finalproject.dto.TatoebaData;
 import com.example.finalproject.dto.TelegramResponseType;
@@ -9,6 +9,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class JsoupService {
@@ -20,12 +21,10 @@ public class JsoupService {
 
             Document doc = Jsoup.connect(url).get();
             Elements elements = doc.select("div");
-            String attr = elements.attr("ng-init");
-
-//            List<String> strings = elements.eachattr("ng-init");
-//            int limit = strings.size();
-//            int random = (int)(Math.random() * limit);
-//            String attr = strings.get(random);
+            List<String> strings = elements.eachAttr("ng-init");
+            int limit = strings.size();
+            int random = (int)(Math.random() * limit);
+            String attr = strings.get(random);
             String s = attr.split("vm.init\\(\\[], ")[1];
             String s1 = s.split("\t")[0];
             s1 = s1.split(", \\[], \\[\\{")[0];
@@ -39,9 +38,6 @@ public class JsoupService {
             } else {
                 translation = data.getTranslations().get(1).get(0).getText();
             }
-
-            System.out.println(text);
-            System.out.println(translation);
 
 
             return TelegramResponseType.builder()

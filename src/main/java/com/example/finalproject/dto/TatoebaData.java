@@ -15,7 +15,7 @@ public class TatoebaData {
         public ArrayList<ArrayList<Translations>> translations;
         public ArrayList<Object> transcriptions;
         public ArrayList<Object> audios;
-        public User user;
+        public UserDTO user;
         public String highlightedText;
         public Object expandLabel;
         public String lang_name;

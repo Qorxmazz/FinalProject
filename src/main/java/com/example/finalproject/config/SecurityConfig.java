@@ -1,10 +1,11 @@
-package com.example.springsecurity2022.config;
+package com.example.finalproject.config;
 
 import com.example.finalproject.config.JwtAuthFilter;
-import com.example.springsecurity2022.dao.UserDao;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import com.example.finalproject.dao.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -33,10 +34,10 @@ public class SecurityConfig {
     private final static List<UserDetails> APPLICATION_USERS = Arrays.asList(
             new User("seferovramin7@gmail.com",
                     "password",
-                    Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN"))),
+                    Collections.singleton(new SimpleGrantedAuthority("Admin"))),
             new User("ramin.safarov@kapitalbank.az",
                     "password123",
-                    Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")))
+                    Collections.singleton(new SimpleGrantedAuthority("User")))
     );
     private final JwtAuthFilter jwtAuthFilter;
     private final UserDao userDao;
@@ -46,7 +47,9 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**/auth/**").permitAll()
+                .antMatchers("/signin").permitAll()
+                .antMatchers("/signup").permitAll()
+
                 .anyRequest()
                 .authenticated()
                 .and()

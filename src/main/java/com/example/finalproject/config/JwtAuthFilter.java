@@ -1,6 +1,6 @@
 package com.example.finalproject.config;
 
-import com.example.springsecurity2022.dao.UserDao;
+import com.example.finalproject.dao.UserDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
