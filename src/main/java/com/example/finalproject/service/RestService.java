@@ -65,13 +65,15 @@ public class RestService {
                     if (chatStage.equals(ChatStage.FROM_LANG.name())) {
                         byChatId1.setFromLang(text);
                         String toLang = byChatId1.getToLang();
-                        if(toLang == null){
+                        if (toLang == null) {
                             byChatId1.setChatStage(ChatStage.TO_LANG.name());
                             repository.save(byChatId1);
                             sendMessage("Zəhmət olmasa hansı dilə tərcümə etmək istədiyinizi seçin", id);
-                        }else { byChatId1.setChatStage(ChatStage.COMPLETED.name());
+                        } else {
+                            byChatId1.setChatStage(ChatStage.COMPLETED.name());
                             repository.save(byChatId1);
-                            sendMessage("Dil seçiminiz uğurla yazıldl", id);}
+                            sendMessage("Dil seçiminiz uğurla yazıldl", id);
+                        }
 
                     } else if (chatStage.equals(ChatStage.TO_LANG.name())) {
                         byChatId1.setToLang(text);
@@ -80,7 +82,7 @@ public class RestService {
                         sendMessage("Seçimləriniz bazaya uğurla yazıldı", id);
                     } else if (chatStage.equals(ChatStage.COMPLETED.name())) {
                         String languageCode = telegramUpdateDTO.getMessageDTO().getFrom().getLanguageCode();
-                        TelegramResponseType telegramResponseType = jsoupService.jsoupService(languageCode,text, byChatId1.getFromLang(), byChatId1.getToLang());
+                        TelegramResponseType telegramResponseType = jsoupService.jsoupService(languageCode, text, byChatId1.getFromLang(), byChatId1.getToLang());
                         sendMessage(telegramResponseType.toString(), id);
                     }
                 }

@@ -39,13 +39,13 @@ public class JsoupService {
                 translation = data.getTranslations().get(1).get(0).getText();
             }
 
-
             return TelegramResponseType.builder()
                     .fromLanguage(text)
                     .toLanguage(translation)
                     .build();
 
-        } catch (Exception exception) {
+        }
+        catch (Exception exception) {
             String response = "";
             switch (languageCode) {
                 case "az": {

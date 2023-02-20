@@ -1,25 +1,33 @@
 package com.example.finalproject.entity;
 
-import lombok.*;
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-@Data
-@Builder
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 @Entity
-@RequiredArgsConstructor
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @GeneratedValue
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
+    @NotNull
+    private String email;
 
-    public void setId(Long id) {
-        this.id = id;
-    }private String email;
+    @NotNull
     private String password;
+
+    @NotNull
     private String role;
+
+
 }

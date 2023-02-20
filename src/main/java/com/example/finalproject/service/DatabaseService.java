@@ -13,6 +13,5 @@ public class DatabaseService {
     public void saveToDb(TelegramResponseDTO dto) {
         MyEntity entity = MyEntity.builder().name(dto.getResult().get(0).getUpdateId()).build();
         repository.save(entity);
-
     }
 }
