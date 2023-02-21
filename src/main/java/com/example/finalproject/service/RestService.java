@@ -32,7 +32,7 @@ public class RestService {
 
     @Autowired
     TelegramRepository repository;
-    RestTemplate restTemplate = new RestTemplate();
+
     private Long offset = null;
 
 
@@ -44,6 +44,7 @@ public class RestService {
 
         if (offset != null)
             url = url + "?offset=" + offset;
+        RestTemplate restTemplate = new RestTemplate();
         TelegramResponseDTO telegramResponseDTO = restTemplate.getForObject(url, TelegramResponseDTO.class);
         int size = telegramResponseDTO.getResult().size();
         if (size > 0) {
