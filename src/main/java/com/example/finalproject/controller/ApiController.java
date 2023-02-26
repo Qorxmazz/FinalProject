@@ -1,6 +1,7 @@
 package com.example.finalproject.controller;
 
 import com.example.finalproject.service.ApiService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ public class ApiController {
 
     @Autowired
     ApiService service;
+    @SecurityRequirement(name = "Bearer Authentication")
 
     @GetMapping("/translate/example")
     public String getExample(@RequestParam ("word") String word, @RequestParam("from") String from, @RequestParam("to")

@@ -6,6 +6,8 @@ import com.example.finalproject.dto.JwtResponse;
 import com.example.finalproject.dto.SignUpDto;
 import com.example.finalproject.entity.UserEntity;
 import com.example.finalproject.repository.UserRepo;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class JwtAuthenticationController {
 
+
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;
     @Autowired
@@ -36,16 +39,14 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public ResponseEntity<?> signIn(@RequestBody JwtRequest request) throws Exception {
-
-        authenticate(request.getUsername(), request.getPassword());
+        authenticate(request.getEmail(), request.getPassword());
         final UserDetails userDetails = jwtInMemoryUserDetailsService
-                .loadUserByUsername(request.getUsername());
+                .loadUserByUsername(request.getEmail());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new JwtResponse(token));
     }
-
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity signUp(@RequestBody SignUpDto dto) {
         UserEntity userEntity = UserEntity.builder()
