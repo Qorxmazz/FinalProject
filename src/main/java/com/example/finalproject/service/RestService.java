@@ -5,7 +5,7 @@ import com.example.finalproject.dto.telegram.send.SendMessageResponseDTO;
 import com.example.finalproject.dto.telegram.send.text.SendMessageDTO;
 import com.example.finalproject.dto.telegram.update.TelegramResponseDTO;
 import com.example.finalproject.dto.telegram.update.TelegramUpdateDTO;
-import com.example.finalproject.entity.ChatStage;
+import com.example.finalproject.enums.ChatStage;
 import com.example.finalproject.entity.TelegramEntity;
 import com.example.finalproject.repository.TelegramRepository;
 import lombok.RequiredArgsConstructor;

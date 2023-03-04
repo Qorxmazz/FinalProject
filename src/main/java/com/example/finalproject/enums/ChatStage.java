@@ -1,4 +1,4 @@
-package com.example.finalproject.entity;
+package com.example.finalproject.enums;
 
 public enum ChatStage   {
     FROM_LANG,

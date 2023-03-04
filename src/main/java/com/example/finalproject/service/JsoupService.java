@@ -23,7 +23,7 @@ public class JsoupService {
             Elements elements = doc.select("div");
             List<String> strings = elements.eachAttr("ng-init");
             int limit = strings.size();
-            int random = (int)(Math.random() * limit);
+            int random = (int) (Math.random() * limit);
             String attr = strings.get(random);
             String s = attr.split("vm.init\\(\\[], ")[1];
             String s1 = s.split("\t")[0];
@@ -38,14 +38,11 @@ public class JsoupService {
             } else {
                 translation = data.getTranslations().get(1).get(0).getText();
             }
-
             return TelegramResponseType.builder()
                     .fromLanguage(text)
                     .toLanguage(translation)
                     .build();
-
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             String response = "";
             switch (languageCode) {
                 case "az": {

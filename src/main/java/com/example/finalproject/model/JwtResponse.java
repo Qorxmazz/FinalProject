@@ -1,4 +1,4 @@
-package com.example.finalproject.dto;
+package com.example.finalproject.model;
 
 import java.io.Serializable;
 

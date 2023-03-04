@@ -1,13 +1,11 @@
 package com.example.finalproject.controller;
 
-import com.example.finalproject.config.JwtTokenUtil;
-import com.example.finalproject.dto.JwtRequest;
-import com.example.finalproject.dto.JwtResponse;
+import com.example.finalproject.securityconfig.JwtTokenUtil;
+import com.example.finalproject.dto.AuthenticationResponse;
+import com.example.finalproject.model.JwtRequest;
 import com.example.finalproject.dto.SignUpDto;
 import com.example.finalproject.entity.UserEntity;
 import com.example.finalproject.repository.UserRepo;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,11 +42,18 @@ public class JwtAuthenticationController {
                 .loadUserByUsername(request.getEmail());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
-
-        return ResponseEntity.ok(new JwtResponse(token));
+        AuthenticationResponse response = AuthenticationResponse.builder()
+                .token(token)
+                .email(request.getEmail())
+                .build();
+        return ResponseEntity.ok(response);
     }
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ResponseEntity signUp(@RequestBody SignUpDto dto) {
+        UserEntity byEmail = userRepo.findUsersEntityByEmail(dto.getEmail());
+        if (byEmail!=null){
+             return ResponseEntity.ok("User already exists!");
+        }
         UserEntity userEntity = UserEntity.builder()
                 .email(dto.getEmail())
                 .password(passwordEncoder.encode(dto.getPassword()))

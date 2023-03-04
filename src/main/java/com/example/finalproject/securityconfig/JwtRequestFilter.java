@@ -1,4 +1,4 @@
-package com.example.finalproject.config;
+package com.example.finalproject.securityconfig;
 
 import com.example.finalproject.service.JwtUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
